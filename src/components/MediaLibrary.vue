@@ -78,12 +78,10 @@ const confirmRemove = (song) => {
 </script>
 
 <style scoped>
-/* 为了更好的视觉效果，我们稍微美化一下列表 */
 .song-list {
   list-style: none;
   padding: 0;
 }
-
 .song-item {
   display: flex;
   justify-content: space-between;
@@ -91,26 +89,31 @@ const confirmRemove = (song) => {
   padding: 0.5rem 0.25rem;
   border-bottom: 1px solid #282828;
   transition: background-color 0.2s;
+  gap: 0.5rem; /* --- 在标题和按钮之间增加一些固定间距 --- */
 }
-
 .song-item:hover {
   background-color: #2a2a2a;
 }
-
 .song-details {
   display: flex;
   flex-direction: column;
+  flex: 1;         /* --- 让此元素占据所有剩余空间 --- */
+  min-width: 0;      /* --- 允许此元素收缩，这是文本截断的关键 --- */
 }
-
 .song-title {
   font-weight: 500;
+  white-space: nowrap;     /* --- 防止标题换行 --- */
+  overflow: hidden;        /* --- 隐藏超出的部分 --- */
+  text-overflow: ellipsis; /* --- 将超出的部分显示为省略号 --- */
 }
-
 .song-artist {
   font-size: 0.8rem;
   color: #b3b3b3;
 }
-
+.song-actions {
+  display: flex;      /* --- 确保按钮内部也使用flex布局 --- */
+  flex-shrink: 0;     /* --- 防止按钮容器被挤压收缩 --- */
+}
 .song-actions button {
   margin-left: 0.5rem;
   background: none;
@@ -121,7 +124,6 @@ const confirmRemove = (song) => {
   height: 28px;
   cursor: pointer;
 }
-
 .song-actions .delete-btn {
   border-color: #812828;
   color: #e04444;
