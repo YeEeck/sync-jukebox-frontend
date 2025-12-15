@@ -99,7 +99,7 @@ h2,
   overflow-y: auto;
   /* 只为列表本身添加滚动条 */
   list-style: none;
-  padding-right: 1.5rem;
+  padding-right: 0.1rem;
   margin: 0;
 }
 
@@ -108,6 +108,7 @@ h2,
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 0.25rem;
+  padding-right: 1rem;
   border-bottom: 1px solid #282828;
   transition: background-color 0.2s;
   gap: 0.5rem;

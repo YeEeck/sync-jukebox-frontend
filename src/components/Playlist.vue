@@ -42,7 +42,7 @@ const store = usePlayerStore();
 
 .song-list {
   list-style: none;
-  padding-right: 1.5rem;
+  padding-right: 0.1rem;
   margin: 0;
 }
 
@@ -51,6 +51,7 @@ const store = usePlayerStore();
   justify-content: space-between;
   align-items: center;
   padding: 0.75rem 0.5rem;
+  padding-right: 1.5rem;
   border-bottom: 1px solid #282828;
   transition: background-color 0.2s ease;
   cursor: pointer;
