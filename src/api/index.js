@@ -40,4 +40,7 @@ export default {
   prev() {
     return apiClient.post('/player/prev');
   },
+  seek(positionMs) {
+    return apiClient.post('/player/seek', { positionMs });
+  },
 };

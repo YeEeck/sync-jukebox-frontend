@@ -81,6 +81,11 @@ export const usePlayerStore = defineStore('player', {
     pause() { api.pause(); },
     next() { api.next(); },
     prev() { api.prev(); },
+    seekTo(positionMs) {
+      // "Fire and Forget"
+      // 我们发送指令，然后等待 WebSocket 推送校准后的进度
+      api.seek(positionMs);
+    },
 
     async addToPlaylist(songId) {
       try {
