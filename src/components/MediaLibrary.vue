@@ -1,5 +1,5 @@
 <template>
-  <div class="library">
+  <div class="media-library-container">
     <h2>Media Library</h2>
     <!-- 文件上传 -->
     <div class="upload-section">
@@ -78,10 +78,31 @@ const confirmRemove = (song) => {
 </script>
 
 <style scoped>
-.song-list {
-  list-style: none;
-  padding: 0;
+.media-library-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  /* 填充 .left-panel 的高度 */
+  overflow: hidden;
+  /* 防止容器自身出现滚动条 */
 }
+
+/* 让标题和上传区域不被压缩 */
+h2,
+.upload-section {
+  flex-shrink: 0;
+}
+
+.song-list {
+  flex: 1;
+  /* 占据所有剩余的垂直空间 */
+  overflow-y: auto;
+  /* 只为列表本身添加滚动条 */
+  list-style: none;
+  padding-right: 1.5rem;
+  margin: 0;
+}
+
 .song-item {
   display: flex;
   justify-content: space-between;
@@ -89,31 +110,45 @@ const confirmRemove = (song) => {
   padding: 0.5rem 0.25rem;
   border-bottom: 1px solid #282828;
   transition: background-color 0.2s;
-  gap: 0.5rem; /* --- 在标题和按钮之间增加一些固定间距 --- */
+  gap: 0.5rem;
+  /* --- 在标题和按钮之间增加一些固定间距 --- */
 }
+
 .song-item:hover {
   background-color: #2a2a2a;
 }
+
 .song-details {
   display: flex;
   flex-direction: column;
-  flex: 1;         /* --- 让此元素占据所有剩余空间 --- */
-  min-width: 0;      /* --- 允许此元素收缩，这是文本截断的关键 --- */
+  flex: 1;
+  /* --- 让此元素占据所有剩余空间 --- */
+  min-width: 0;
+  /* --- 允许此元素收缩，这是文本截断的关键 --- */
 }
+
 .song-title {
   font-weight: 500;
-  white-space: nowrap;     /* --- 防止标题换行 --- */
-  overflow: hidden;        /* --- 隐藏超出的部分 --- */
-  text-overflow: ellipsis; /* --- 将超出的部分显示为省略号 --- */
+  white-space: nowrap;
+  /* --- 防止标题换行 --- */
+  overflow: hidden;
+  /* --- 隐藏超出的部分 --- */
+  text-overflow: ellipsis;
+  /* --- 将超出的部分显示为省略号 --- */
 }
+
 .song-artist {
   font-size: 0.8rem;
   color: #b3b3b3;
 }
+
 .song-actions {
-  display: flex;      /* --- 确保按钮内部也使用flex布局 --- */
-  flex-shrink: 0;     /* --- 防止按钮容器被挤压收缩 --- */
+  display: flex;
+  /* --- 确保按钮内部也使用flex布局 --- */
+  flex-shrink: 0;
+  /* --- 防止按钮容器被挤压收缩 --- */
 }
+
 .song-actions button {
   margin-left: 0.5rem;
   background: none;
@@ -124,6 +159,7 @@ const confirmRemove = (song) => {
   height: 28px;
   cursor: pointer;
 }
+
 .song-actions .delete-btn {
   border-color: #812828;
   color: #e04444;
@@ -131,5 +167,30 @@ const confirmRemove = (song) => {
 
 .upload-section {
   margin-bottom: 1rem;
+}
+
+/* --- 自定义滚动条样式 --- */
+.song-list::-webkit-scrollbar {
+  width: 8px;
+  /* 滚动条宽度 */
+}
+
+.song-list::-webkit-scrollbar-track {
+  background: #181818;
+  /* 滚动条轨道颜色，与面板背景色相同 */
+  border-radius: 10px;
+}
+
+.song-list::-webkit-scrollbar-thumb {
+  background-color: #535353;
+  /* 滚动条滑块颜色 */
+  border-radius: 10px;
+  border: 2px solid #181818;
+  /* 创建一个围绕滑块的边框效果 */
+}
+
+.song-list::-webkit-scrollbar-thumb:hover {
+  background-color: #777;
+  /* 鼠标悬停时滑块的颜色 */
 }
 </style>
