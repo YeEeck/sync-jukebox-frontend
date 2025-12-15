@@ -27,8 +27,8 @@ const store = usePlayerStore();
 <style scoped>
 .playlist-container h2 {
   margin-bottom: 1rem;
-  font-size: 1.2rem;
-  font-weight: 500;
+  /* font-size: 1.2rem; */
+  /* font-weight: 500; */
   padding-bottom: 0.5rem;
   border-bottom: 1px solid #282828;
 }
