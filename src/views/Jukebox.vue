@@ -48,6 +48,7 @@ main {
   background-color: #181818; /* 给面板一个背景色，视觉上更清晰 */
   border-radius: 8px;       /* 添加圆角，更美观 */
   padding: 1.5rem;          /* --- 给面板内部内容增加边距 --- */
+  min-width: 0;
 }
 footer {
   background-color: #181818; /* 与PlayerControls的背景色统一 */
