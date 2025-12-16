@@ -96,6 +96,15 @@ export const usePlayerStore = defineStore('player', {
       }
     },
 
+    async removeSongFromPlaylist(songId) {
+      try {
+        await api.removeFromPlaylist(songId);
+        // 无需手动更新 state.playlist，依赖 WebSocket 推送
+      } catch (error) {
+        console.error('Failed to remove song from playlist:', error);
+      }
+    },
+
     async fetchLibrary() {
       try {
         const response = await api.getLibrary();

@@ -27,6 +27,9 @@ export default {
   addToPlaylist(songId) {
     return apiClient.post('/playlist/add', { songId });
   },
+  removeFromPlaylist(songId) {
+    return apiClient.post('/playlist/remove', { songId });
+  },
   // 播放器控制
   play() {
     return apiClient.post('/player/play');
