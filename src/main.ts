@@ -15,7 +15,6 @@ const pinia = createPinia()
 app.use(pinia)
 app.use(router)
 
-// --- 新增逻辑 ---
 // 在挂载应用之前，尝试自动登录
 const playerStore = usePlayerStore(pinia) // 注意：在 setup 外使用 store 需要传入 pinia 实例
 const token = localStorage.getItem('jukebox_token')
@@ -31,6 +30,5 @@ if (token) {
     }
   })
 }
-// --- 逻辑结束 ---
 
 app.mount('#app')

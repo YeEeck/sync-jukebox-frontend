@@ -35,11 +35,9 @@ export const usePlayerStore = defineStore('player', {
   getters: {
     // 计算当前歌曲的音频文件URL
     currentSongUrl: (state) => {
-      // 不再依赖不存在的 filePath，而是直接使用 state.currentSong.id
       if (state.currentSong && state.currentSong.id) {
-        // 根据后端文档，我们拼接URL。
-        // 注意：后端说文件名是 {uuid}.ext，但没说扩展名是什么。
-        // 我们暂时假设所有音频都是 .mp3 格式。如果不是，需要和后端同学确认。
+        // 文件名是 {uuid}.ext，但没说扩展名是什么。
+        // 暂时假设所有音频都是 .mp3 格式。
         return `http://10.8.0.10:8080/static/audio/${state.currentSong.id}.mp3`;
       }
       return null;
@@ -142,7 +140,7 @@ export const usePlayerStore = defineStore('player', {
       
       this.localVolume = clampedVolume;
       
-      // --- 新增：将新音量保存到 localStorage ---
+      // --- 将新音量保存到 localStorage ---
       localStorage.setItem(VOLUME_STORAGE_KEY, clampedVolume.toString());
     },
   },
