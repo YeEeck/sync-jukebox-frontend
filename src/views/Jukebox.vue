@@ -1,6 +1,11 @@
 <template>
   <div class="jukebox-layout">
-    <header>SyncJukebox</header>
+    <header>
+      <img src="/icon.png" alt="SyncJukebox Icon" class="icon" />
+      <div class="title">
+        SyncJukebox
+      </div>
+    </header>
     <main>
       <div class="left-panel">
         <MediaLibrary />
@@ -27,7 +32,15 @@ import PlayerControls from '../components/PlayerControls.vue';
   flex-direction: column;
   height: 100%;
 }
+.icon {
+  width: 32px;
+  height: 32px;
+  margin-right: 0.5rem;
+}
 header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 1rem;
   background-color: #181818;
   text-align: center;
