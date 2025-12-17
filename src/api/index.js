@@ -30,9 +30,17 @@ export default {
   removeFromPlaylist(songId) {
     return apiClient.post('/playlist/remove', { songId });
   },
+  // --- 播放列表操作 ---
+  movePlaylistItem(songId, newIndex) {
+    return apiClient.post('/playlist/move', { songId, newIndex });
+  },
   // 播放器控制
   play() {
     return apiClient.post('/player/play');
+  },
+  // --- 播放指定曲目 ---
+  playSpecific(songId) {
+    return apiClient.post('/player/play-specific', { songId });
   },
   pause() {
     return apiClient.post('/player/pause');

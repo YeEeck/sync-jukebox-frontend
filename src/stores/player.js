@@ -76,6 +76,14 @@ export const usePlayerStore = defineStore('player', {
 
     // --- 调用 HTTP API 的 Actions (Fire and Forget) ---
     play() { api.play(); },
+    // 播放指定 ID 的歌曲
+    async playSpecificSong(songId) {
+      try {
+        await api.playSpecific(songId);
+      } catch (error) {
+        console.error('Failed to play specific song:', error);
+      }
+    },
     pause() { api.pause(); },
     next() { api.next(); },
     prev() { api.prev(); },
@@ -91,6 +99,16 @@ export const usePlayerStore = defineStore('player', {
         // 无需手动更新 state，等待 WebSocket 推送
       } catch (error) {
         console.error('Failed to add song to playlist:', error);
+      }
+    },
+
+    // 调整播放列表顺序
+    async movePlaylistItem(songId, newIndex) {
+      try {
+        // 先调用 API，状态更新依赖 WebSocket 推送，保持前端状态单一数据源
+        await api.movePlaylistItem(songId, newIndex);
+      } catch (error) {
+        console.error('Failed to reorder playlist:', error);
       }
     },
 
