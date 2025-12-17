@@ -254,7 +254,7 @@ const formatTime = (ms) => {
 
 /* --- 自定义 Input Range 样式 (核心) --- */
 .custom-range {
-  -webkit-appearance: none; /* 清除默认样式 */
+  appearance: none; /* 清除默认样式 */
   width: 100%;
   height: 4px;
   border-radius: 2px;
