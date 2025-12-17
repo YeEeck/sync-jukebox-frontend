@@ -20,8 +20,8 @@
           <span class="song-artist">{{ song.artist || 'Unknown Artist' }}</span>
         </div>
         <div class="song-actions">
-          <button @click="store.addToPlaylist(song.id)" title="Add to playlist">+</button>
-          <!-- --- 新增删除按钮 --- -->
+          <button v-if="!playlistSongIds.has(song.id)" @click="store.addToPlaylist(song.id)" title="Add to playlist">+</button>
+          <!-- --- 删除按钮 --- -->
           <button @click="confirmRemove(song)" class="delete-btn" title="Delete from library">×</button>
         </div>
       </li>
@@ -30,11 +30,18 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, computed } from 'vue';
 import { usePlayerStore } from '@/stores/player';
 const store = usePlayerStore();
 const pollingInterval = ref(null);
 const isLoading = ref(false); // 用于显示加载状态的响应式变量
+
+// 创建计算属性，实时计算播放列表中已有的歌曲 ID 集合
+const playlistSongIds = computed(() => {
+  // 根据 playlist.vue 的逻辑，播放列表项包含 song_id 字段
+  // 使用 Set 可以将查找复杂度从 O(N) 降低到 O(1)
+  return new Set(store.playlist.map(item => item.song_id));
+});
 
 // 封装刷新逻辑
 const refreshLibrary = async () => {
