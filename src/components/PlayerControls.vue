@@ -312,12 +312,6 @@ const formatTime = (ms) => {
   opacity: 1;
 }
 
-/* 鼠标悬停时，轨道变绿（可选，类似 Spotify 交互） */
-.custom-range:hover {
-  /* 这里主要靠 JS 的 background linear-gradient 来控制颜色 */
-}
-
-
 /* --- 音量控制 --- */
 .volume-control {
   flex: 1;
