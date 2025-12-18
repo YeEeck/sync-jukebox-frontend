@@ -40,6 +40,7 @@ const playAudio = () => {
       // 这里是关键！捕获并打印自动播放失败的错误
       console.error("Audio play failed:", error);
       // 可以在这里给用户一个提示，例如“请点击页面以开始播放”
+      store.playbackError = error;
     });
   }
 };

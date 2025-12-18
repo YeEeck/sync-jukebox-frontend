@@ -32,6 +32,7 @@ export const usePlayerStore = defineStore('player', {
     localVolume: loadInitialVolume(),
     // 用于记录静音前的音量
     previousVolume: null,
+    playbackError: null,
   }),
 
   getters: {
