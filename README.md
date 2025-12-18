@@ -10,6 +10,5 @@ Learn more about the recommended Project Setup and IDE Support in the [Vue Docs 
 
 ## TODO
 
-- 增加播放列表播放模式选择
-- 增加播放文件上传后的界面Loading状态
-- 小工具：增加网易云的NCM文件转换工具
+- 增加播放列表播放模式选择✅
+- 增加播放文件上传后的界面Loading状态✅

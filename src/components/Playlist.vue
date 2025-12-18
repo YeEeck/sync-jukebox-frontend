@@ -1,6 +1,17 @@
 <template>
   <div class="playlist-container">
-    <h2>Playlist</h2>
+    <div class="playlist-header">
+      <h2>Playlist</h2>
+      <!-- 新增: 打乱按钮 -->
+      <button 
+        class="shuffle-btn" 
+        @click="handleShuffle" 
+        title="Shuffle Playlist"
+        :disabled="!store.playlist || store.playlist.length < 2"
+      >
+        <IconShuffle />
+      </button>
+    </div>
     <ul v-if="store.playlist && store.playlist.length > 0" class="song-list">
       <!-- 拖放、双击播放功能
         1. 增加 draggable="true"
@@ -34,8 +45,14 @@
 <script setup>
 import { ref } from 'vue';
 import IconTrash from '@/components/icons/IconTrash.vue';
+import IconShuffle from '@/components/icons/IconShuffle.vue';
 import { usePlayerStore } from '@/stores/player';
 const store = usePlayerStore();
+
+// --- 处理打乱点击 ---
+const handleShuffle = () => {
+  store.shufflePlaylist();
+};
 
 const handleRemove = (item) => {
   // 注意：根据后端 API 定义，我们需要传 songId。
@@ -123,18 +140,63 @@ const onDrop = (event, targetIndex) => {
 </script>
 
 <style scoped>
+/* 修改 playlist-header 样式以容纳按钮 */
+.playlist-header {
+  display: flex;
+  justify-content: space-between; /* 标题左对齐，按钮右对齐 */
+  align-items: center;
+  flex-shrink: 0;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #282828;
+}
+
+.playlist-header h2 {
+  /* 去掉原来 h2 的 margin 和 padding，因为移动到了 header 容器上 */
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.shuffle-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #b3b3b3; /* 默认灰色 */
+  width: 32px;    /* 固定宽高，确保是正圆 */
+  height: 32px;
+  padding: 0;     /* 清除 padding，配合 flex 居中 */
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* 悬停时：图标变白，背景微亮 */
+.shuffle-btn:hover {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05); /* 微微放大 */
+}
+/* 点击时：图标变绿，模拟 Spotify 激活状态 */
+.shuffle-btn:active {
+  color: #1db954; /* Spotify Green */
+  transform: scale(0.95);
+  background-color: rgba(255, 255, 255, 0.15);
+}
+/* 禁用状态 */
+.shuffle-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: none;
+  color: #b3b3b3;
+}
+
 .playlist-container {
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow: hidden;
-}
-
-.playlist-container h2 {
-  flex-shrink: 0;
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid #282828;
 }
 
 .song-list,

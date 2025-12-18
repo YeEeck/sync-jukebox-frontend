@@ -112,6 +112,15 @@ export const usePlayerStore = defineStore('player', {
       }
     },
 
+    async shufflePlaylist() {
+      try {
+        await api.shufflePlaylist();
+        // 同样不需要手动更新 state，等待 WebSocket 推送新的 GlobalState
+      } catch (error) {
+        console.error('Failed to shuffle playlist:', error);
+      }
+    },
+
     async removeSongFromPlaylist(songId) {
       try {
         await api.removeFromPlaylist(songId);

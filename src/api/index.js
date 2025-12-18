@@ -34,6 +34,9 @@ export default {
   movePlaylistItem(songId, newIndex) {
     return apiClient.post('/playlist/move', { songId, newIndex });
   },
+  shufflePlaylist() {
+    return apiClient.post('/playlist/shuffle');
+  },
   // 播放器控制
   play() {
     return apiClient.post('/player/play');
