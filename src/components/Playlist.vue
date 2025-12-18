@@ -19,7 +19,7 @@
         3. 增加一系列 @drag* 事件处理拖拽
         4. 增加 :class 绑定，用于显示拖拽时的视觉效果
       -->
-      <li v-for="(item, index) in store.playlist" :key="item.id" class="song-item" :class="{
+      <li v-for="(item, index) in store.playlist" :key="item.song_id" class="song-item" :class="{
         'is-playing': store.currentSongId === item.song_id,
         // 'drag-over': dragOverIndex === index,
         'is-dragging': draggedItemIndex === index,
