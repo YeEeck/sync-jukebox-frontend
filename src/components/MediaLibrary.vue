@@ -2,15 +2,7 @@
   <div class="media-library-container">
     <h2>Media Library</h2>
     <!-- 文件上传 -->
-    <div class="upload-section">
-      <!-- 隐藏真实的 file input -->
-      <input type="file" id="file-upload" class="hidden-input" @change="handleFileUpload" accept="audio/*" />
-      <!-- 使用 label 作为自定义按钮 -->
-      <label for="file-upload" class="upload-btn">
-        <span class="icon">☁️</span>
-        <span>Upload New Song</span>
-      </label>
-    </div>
+    <MediaUpload />
 
     <!-- 歌曲列表 -->
     <ul class="song-list">
@@ -32,6 +24,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue';
 import { usePlayerStore } from '@/stores/player';
+import MediaUpload from '@/components/MediaUpload.vue';
 const store = usePlayerStore();
 const pollingInterval = ref(null);
 const isLoading = ref(false); // 用于显示加载状态的响应式变量
@@ -107,57 +100,9 @@ h2,
   flex-shrink: 0;
 }
 
-/* --- 上传按钮样式 --- */
-
-.upload-section {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  /* 增加一点内边距，防止按钮贴边 */
-  padding: 0 0.25rem;
-}
-
 /* 隐藏原本丑陋的 input */
 .hidden-input {
   display: none;
-}
-
-/* 自定义上传按钮样式 */
-.upload-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: 0.75rem;
-  background-color: #282828;
-  /* 与列表分割线颜色呼应，深灰色背景 */
-  color: #fff;
-  border: 1px dashed #535353;
-  /* 虚线边框，暗示这是个放置区域 */
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 0.9rem;
-  font-weight: 500;
-  gap: 0.5rem;
-  /* 图标和文字的间距 */
-}
-
-.upload-btn:hover {
-  background-color: #333;
-  /* 悬停稍微变亮 */
-  border-color: #1db954;
-  /* 悬停时边框变成 Spotify 绿 (或者你想要的主题色) */
-  color: #fff;
-}
-
-.upload-btn:active {
-  background-color: #222;
-  transform: translateY(1px);
-  /* 点击时的微小下沉效果 */
-}
-
-.upload-btn .icon {
-  font-size: 1.2rem;
 }
 
 .song-list {
@@ -231,10 +176,6 @@ h2,
 .song-actions .delete-btn {
   border-color: #812828;
   color: #e04444;
-}
-
-.upload-section {
-  margin-bottom: 1rem;
 }
 
 /* --- 自定义滚动条样式 --- */
