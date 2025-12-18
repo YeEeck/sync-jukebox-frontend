@@ -30,6 +30,8 @@ export const usePlayerStore = defineStore('player', {
     isAuthenticated: false,
     mediaLibrary: [],
     localVolume: loadInitialVolume(),
+    // 用于记录静音前的音量
+    previousVolume: null,
   }),
 
   getters: {
@@ -170,5 +172,21 @@ export const usePlayerStore = defineStore('player', {
       // --- 将新音量保存到 localStorage ---
       localStorage.setItem(VOLUME_STORAGE_KEY, clampedVolume.toString());
     },
+
+    // 切换静音/恢复音量
+    toggleMute() {
+      if (this.localVolume > 0) {
+        // 当前有声音，记录当前音量并静音
+        this.previousVolume = this.localVolume;
+        this.setLocalVolume(0);
+      } else {
+        // 当前是静音，恢复音量
+        // 如果有记录且记录大于0，则恢复记录值；否则默认恢复到 0.5
+        const targetVolume = (this.previousVolume && this.previousVolume > 0) 
+          ? this.previousVolume 
+          : 0.5;
+        this.setLocalVolume(targetVolume);
+      }
+    }
   },
 });
