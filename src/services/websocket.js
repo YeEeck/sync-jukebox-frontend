@@ -1,7 +1,7 @@
 import { usePlayerStore } from '@/stores/player';
 
 let socket = null;
-const WS_URL = 'ws://10.8.0.10:8080/ws';
+const WS_URL = '/ws';
 
 export const websocketService = {
   connect() {

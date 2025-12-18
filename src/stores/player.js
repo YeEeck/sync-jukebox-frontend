@@ -38,7 +38,7 @@ export const usePlayerStore = defineStore('player', {
       if (state.currentSong && state.currentSong.id) {
         // 文件名是 {uuid}.ext，但没说扩展名是什么。
         // 暂时假设所有音频都是 .mp3 格式。
-        return `http://10.8.0.10:8080/static/audio/${state.currentSong.id}.mp3`;
+        return `/static/audio/${state.currentSong.id}.mp3`;
       }
       return null;
     },
